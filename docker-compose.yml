@@ -7,9 +7,7 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
   configurator:
     image: frappe/erpnext:v14.31.3
@@ -33,9 +31,7 @@ services:
       REDIS_SOCKETIO: redis-socketio:6379
       SOCKETIO_PORT: "9000"
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
   db:
     image: mariadb:10.6
@@ -73,9 +69,7 @@ services:
       PROXY_READ_TIMEOUT: 120
       CLIENT_MAX_BODY_SIZE: 50m
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
     ports:
       - "8080:8080"
 
@@ -90,9 +84,7 @@ services:
       - --queue
       - default
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
   queue-long:
     image: frappe/erpnext:v14.31.3
@@ -105,9 +97,7 @@ services:
       - --queue
       - long
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
   queue-short:
     image: frappe/erpnext:v14.31.3
@@ -120,9 +110,7 @@ services:
       - --queue
       - short
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
   redis-queue:
     image: redis:6.2-alpine
@@ -157,9 +145,7 @@ services:
       - bench
       - schedule
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
   websocket:
     image: frappe/erpnext:v14.31.3
@@ -170,15 +156,11 @@ services:
       - node
       - /home/frappe/frappe-bench/apps/frappe/socketio.js
     volumes:
-      - sites:/home/frappe/frappe-bench/sites
-      - apps:/home/frappe/frappe-bench/apps
-      - logs:/home/frappe/frappe-bench/logs
+      - frappe-bench:/home/frappe/frappe-bench
 
 volumes:
   db-data:
   redis-queue-data:
   redis-cache-data:
   redis-socketio-data:
-  sites:
-  apps:
-  logs:
+  frappe-bench:
