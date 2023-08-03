@@ -173,8 +173,6 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    environment:
-      DEBUG: "*"
     command:
       - node
       - /home/frappe/frappe-bench/apps/frappe/socketio.js
