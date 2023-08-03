@@ -173,6 +173,8 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+    environment:
+      DEBUG: "*"
     command:
       - node
       - /home/frappe/frappe-bench/apps/frappe/socketio.js
@@ -181,6 +183,8 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - env:/home/frappe/frappe-bench/env
       - apps:/home/frappe/frappe-bench/apps
+    ports:
+      - "127.0.0.1:9000:9000"
 
 volumes:
   db-data:
