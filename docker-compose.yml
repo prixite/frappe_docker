@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: frappe/erpnext:v14.36.0
+    image: frappe/erpnext:v14.31.3
     deploy:
       restart_policy:
         condition: on-failure
